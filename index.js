@@ -8,18 +8,22 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
     var buttonInnerHTML = this.innerHTML;
 
     makeSound(buttonInnerHTML);
+
+    buttonAnimation(buttonInnerHTML);
   });
 }
 
 // detecting keybpard pressed
 document.addEventListener("keydown", function(event) {
   makeSound(event.key);
+
+  buttonAnimation(event.key);
 });
 
 function makeSound(key) {
 
   switch (key)
-case "w":
+    case "w":
     var crash = new Audio("sounds/crash.mp3");
   crash.play();
   break;
@@ -57,7 +61,17 @@ case "w":
   default: console.log(buttonInnerHTML);
 
 }
+// Animation
 
+function buttonAnimation(currentKey){
 
+var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+  
+  setTimeOut(function(){
+    activeButton.classList.remove("pressed");
+  }, 100);
+}
 // var audio = new Audio("sounds/tom-1.mp3");
 // audio.play();
